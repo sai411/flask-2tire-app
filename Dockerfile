@@ -1,8 +1,8 @@
-FROM python:3.9-alpine3.17
-WORKDIR /flask_app
-COPY . ${WORKDIR}
-RUN apk update && apk add mariadb-dev pkg-config
-RUN pip install mysqlclient
+FROM ubuntu:latest
+WORKDIR /flask-app
+COPY . .
+RUN apt-get update && apt-get -y install python3 && apt-get -y install pip \
+&& apt-get -y install python3-dev libmysqlclient-dev pkg-config
+RUN pip install mysqlclient 
 RUN pip install -r requirements.txt
-EXPOSE 5000
 CMD [ "python3", "app.py" ]
