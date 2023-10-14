@@ -15,11 +15,12 @@ pipeline{
                 sh "ls -lrt"
                 sh "docker build -f Dockerfile -t ${docker_image} ."
                 sh "docker tag ${docker_image} ${docker_image_latest}"
+                script {
                 docker.withRegistry('', 'docker-cred'){
                    sh "docker push ${docker_image_latest}"
                    sh "docker push ${docker_image}"
                 }
-                
+                }
 
              }
 
