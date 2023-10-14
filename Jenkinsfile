@@ -34,7 +34,7 @@ pipeline{
             sh "docker stop mysql && docker rm mysql"
             sh "docker run -dit --name=mysql -p 3306:3306 --network my-network -e 'MYSQL_ROOT_PASSWORD=1234' -e 'MYSQL_DATABASE=mydb' -e 'MYSQL_USER=admin' -e 'MYSQL_PASSWORD=admin' -v ./message.sql:/docker-entrypoint-initdb.d/message.sql mysql"
             sh "docker stop flask-app && docker rm flask-app"
-            sh "docker run -dit --name=flask_app -p 5000:5000 -e 'MYSQL_HOST=mysql' -e 'MYSQL_USER=admin' -e 'MYSQL_PASSWORD=admin' -e 'MYSQL_DB=mydb' --network my-network flask_app:v1"
+            sh "docker run -dit --name=flask-app -p 5000:5000 -e 'MYSQL_HOST=mysql' -e 'MYSQL_USER=admin' -e 'MYSQL_PASSWORD=admin' -e 'MYSQL_DB=mydb' --network my-network flask_app:v1"
         }
 
      }
