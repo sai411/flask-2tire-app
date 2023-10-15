@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   name: mysql
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: mysql
@@ -35,20 +36,18 @@ spec:
               secretKeyRef:
                name: mysql-secret
                key: MYSQL_PASSWORD
-          
+        ports:
+         - containerPort: 3306
         volumeMounts:
              - name: config-vol
                mountPath:  /docker-entrypoint-initdb.d
              - name: pvc-vol
                mountPath: /var/lib/mysql
         
-        volumes:
+      volumes:
            - name: config-vol
              configMap:
                 name: sql-config
            - name: pvc-vol
              persistentVolumeClaim:
                claimName: sql-pvc
-                               
-        ports:
-        - containerPort: 3306

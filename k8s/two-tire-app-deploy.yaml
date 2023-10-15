@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   name: flask-app
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: flask-app
@@ -15,8 +16,13 @@ spec:
       - name: flask-img
         image: sai411/flask_img_project:latest
         env:
+        - name: MYSQL_DB
+          valueFrom:
+             secretKeyRef:
+                name: mysql-secret
+                key: MYSQL_DATABASE
         - name: MYSQL_HOST
-          value: sql-svc
+          value: mysql-svc
         - name: MYSQL_USER
           valueFrom:
               secretKeyRef:
