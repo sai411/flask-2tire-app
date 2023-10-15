@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-app
+spec:
+  selector:
+    matchLabels:
+      app: flask-app
+  template:
+    metadata:
+      labels:
+        app: flask-app
+    spec:
+      containers:
+      - name: flask-img
+        image: sai411/flask_img_project:latest
+        env:
+        - name: MYSQL_HOST
+          value: sql-svc
+        - name: MYSQL_USER
+          valueFrom:
+              secretKeyRef:
+                name: mysql-secret
+                key: MYSQL_USER
+        - name:  MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+               name: mysql-secret
+               key: password
+        ports:
+        - containerPort: 5000
