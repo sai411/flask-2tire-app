@@ -34,7 +34,7 @@ spec:
             valueFrom:
               secretKeyRef:
                name: mysql-secret
-               key: password
+               key: MYSQL_PASSWORD
           
         volumeMounts:
              - name: config-vol
