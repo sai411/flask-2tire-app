@@ -14,7 +14,7 @@ pipeline{
      
        stage("sonar check"){
           steps{
-              withSonarQubeEnv(installationName: 'sonar-scanner', credentialsId: 'sonar-cred') {
+              withSonarQubeEnv(installationName: 'sonarscanner', credentialsId: 'sonar-cred') {
                 sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=flask-app"
     }
   }
