@@ -5,7 +5,7 @@ pipeline{
     environment {
         docker_image = "sai411/flask_img_project:${env.BUILD_NUMBER}"
         docker_image_latest = "sai411/flask_img_project:latest"
-        scannerHome = tool 'SonarScanner';
+        scannerHome = tool 'sonar-scanner';
     }
   
     stages{
@@ -14,7 +14,7 @@ pipeline{
 
           steps{
              
-              withSonarQubeEnv(installationName: 'soanr-scanner', credentialsId: 'sonar-cred') {
+              withSonarQubeEnv(installationName: 'sonarscanner', credentialsId: 'sonar-cred') {
               sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=flask-2tire-app"
     }
   }
@@ -25,7 +25,7 @@ pipeline{
 
                 sh "docker build -t ${docker_image} ."
                 sh "docker tag ${docker_image} ${docker_image_latest}"
-                withRegistry('', 'docker-cred'){
+                docker.withRegistry('', 'docker-cred'){
                    sh "docker push ${docker_image_latest}"
                    sh "docker push ${docker_image}"
                 }
