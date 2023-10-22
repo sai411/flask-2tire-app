@@ -15,7 +15,7 @@ pipeline{
        stage("sonar check"){
           steps{
               withSonarQubeEnv(installationName: 'sonar-scanner', credentialsId: 'sonar-cred') {
-                sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=flask-2tire-app"
+                sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=flask-app"
     }
   }
 }
