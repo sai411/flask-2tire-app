@@ -38,6 +38,7 @@ pipeline{
 
        }
       stage('deploy application') {
+        steps{
          withCredentials([gitUsernamePassword(credentialsId: 'git-cred', gitToolName: 'Default')]) {
          sh """
            git config user.email "saisatyanarayanagampa@gmail.com"
@@ -48,9 +49,8 @@ pipeline{
            git commit -m "Update deployment yaml with version : ${BUILD_NUMBER}
            git push origin HEAD:master
            """
-
-
-      }         
+      }       
+}  
       }
        }
    
