@@ -44,7 +44,7 @@ pipeline{
            sed -i "s${docker_image}:.*/${docker_image}:\"${BUILD_NUMBER}\"/" k8s/two-tier-app-deployment.yml
            git add k8s/two-tier-app-deployment.yml
            git commit -m "Update deployment yaml with version : ${BUILD_NUMBER}
-           git push origin HEAD:main
+           git push origin HEAD:master
            """
 
 
