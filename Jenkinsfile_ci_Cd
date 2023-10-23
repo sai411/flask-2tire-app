@@ -44,7 +44,7 @@ pipeline{
            git config user.email "saisatyanarayanagampa@gmail.com"
            git config user.name "sai411"
            BUILD_NUMBER=${env.BUILD_NUMBER}
-           sed -i s"${docker_image}:.*/${docker_image}:\"${BUILD_NUMBER}\"/" k8s/two-tier-app-deployment.yml
+           sed -i 's/${docker_image}:.*/${docker_image}:\"${BUILD_NUMBER}\"/' k8s/two-tier-app-deployment.yml
            git add k8s/two-tier-app-deployment.yml
            git commit -m "Update deployment yaml with version : ${BUILD_NUMBER}
            git push origin HEAD:master
