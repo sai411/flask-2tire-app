@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: flask-img
-        image: sai411/flask_img_project:14
+        image: sai411/flask_img_project:15
         env:
         - name: MYSQL_DB
           valueFrom:
